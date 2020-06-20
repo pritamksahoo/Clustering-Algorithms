@@ -43,8 +43,7 @@ if __name__ == '__main__':
 	else:
 		print("Enter the entire Distance Matrix : ")
 		for i in range(no):
-			for j in range(no):
-				dist_m[i] = list(map(float, input().split()))
+			dist_m[i] = list(map(float, input().split()))
 
 		for i in range(no):
 			for j in range(no):
@@ -103,7 +102,7 @@ if __name__ == '__main__':
 					elif linkage == 2:
 						d = max(dist_m[min_cell][k], dist_m[max_cell][k])
 					else:
-						l1, l2 = len(clusters[min_cell]), clusters[max_cell]
+						l1, l2 = len(clusters[min_cell]), len(clusters[max_cell])
 						d = (l1*dist_m[min_cell][k] + l2*dist_m[max_cell][k]) / (l1 + l2)
 
 					dist_m[min_cell][k] = dist_m[k][min_cell] = d

@@ -19,31 +19,43 @@ if __name__ == '__main__':
 	no = int(input("Enter no. of points : "))
 	s_no = ord('A')
 
+	flag = int(input("Is distance matrix given? (1 for yes, 0 for no) : "))
 	points = []
-	for i in range(no):
-		points.append(list(map(float, input(chr(s_no+i) + " : ").split())))
+
+	if flag == 0:
+		for i in range(no):
+			points.append(list(map(float, input(chr(s_no+i) + " : ").split())))
+
+		d_f = int(input("Enter distance calculating function (1 for euclidean, 0 for manhattan) : "))
+
+		eps_n = {}
+		dist_m = [[0 for j in range(no)] for i in range(no)]
+
+		for i in range(no):
+			for j in range(no):
+				if i == j:
+					dist_m[i][j] = 0
+
+				elif i > j:
+					dist_m[i][j] = dist_m[j][i]
+
+				else:
+					dist_m[i][j] = round(dist(points[i], points[j], d_f), 2)
+
+	else:
+		print("Enter the entire Distance Matrix : ")
+		for i in range(no):
+			dist_m[i] = list(map(float, input().split()))
+
+		for i in range(no):
+			for j in range(no):
+				dist_m[i][j] = dist_m[j][i] = max(dist_m[i][j], dist_m[j][i])
 
 	epsilon = float(input("Enter eps value : "))
 	minpts = int(input("Enter Minimum Points : "))
 
-	d_f = int(input("Enter distance calculating function (1 for euclidean, 0 for manhattan) : "))
-
 	print("\n================\nSOLUTION : \n================\n")
 	print("en : epsilon neighbourhood\n")
-
-	eps_n = {}
-	dist_m = [[0 for j in range(no)] for i in range(no)]
-
-	for i in range(no):
-		for j in range(no):
-			if i == j:
-				dist_m[i][j] = 0
-
-			elif i > j:
-				dist_m[i][j] = dist_m[j][i]
-
-			else:
-				dist_m[i][j] = round(dist(points[i], points[j], d_f), 2)
 
 	print("Distance Matrix : ")
 	for i in range(no):
