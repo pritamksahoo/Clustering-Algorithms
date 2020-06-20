@@ -2,9 +2,17 @@ import numpy as np
 
 def dist(p1, p2, flag):
 	if flag == 1:
-		return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**(0.5)
+		ans = 0
+		for i in range(len(p1)):
+			ans = ans + (p1[i]-p2[i])**2
+
+		return (ans)**(0.5)
 	else:
-		return (abs(p1[0]-p2[0]) + abs(p1[1]-p2[1]))
+		ans = 0
+		for i in range(len(p1)):
+			ans = ans + abs(p1[i]-p2[i])
+
+		return ans
 
 
 if __name__ == '__main__':
@@ -27,6 +35,9 @@ if __name__ == '__main__':
 
 	else:
 		n_rand = np.random.randint(0, no, n_clusters)
+		while len(set(n_rand)) != n_clusters:
+			n_rand = np.random.randint(0, no, n_clusters)
+
 		for i in range(n_clusters):
 			clusters[i+1] = {}
 			clusters[i+1]["center"] = points[n_rand[i]]
